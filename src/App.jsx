@@ -28,9 +28,8 @@ class App extends Component {
     }
 
 
-    deleteItem = (name) => {
-        let currentItems = this.state.items.filter((item) => item.name !== name);
-        this.setState({ items: currentItems });
+    updateDeleteItemState = (itemDatas) => {
+        this.setState({ items: itemDatas });
     }
 
 
@@ -44,7 +43,7 @@ class App extends Component {
                     <Product onAdd={() => this.addItem(1, 'Äpfel', 3.99)} title="Äpfel" image="apfel.jpg" description="Füge Äpfel zu deinem Warenkorb hinzu." />
                     <Product onAdd={() => this.addItem(1, 'Birnen', 4.49)} title="Birnen" image="birne.jpg" description="Füge Birnen zu deinem Warenkorb hinzu." />
                 </div>
-                <ShoppingCard items={this.state.items} onDelete={this.deleteItem} />
+                <ShoppingCard items={this.state.items} onDelete={this.updateDeleteItemState} />
             </div>
         </React.Fragment>;
     }
