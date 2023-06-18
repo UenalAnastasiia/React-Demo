@@ -11,25 +11,30 @@ class App extends Component {
 
     addItem = (amount, name, price) => {
         let currentItems = this.state.items;
-
         let existingItem = this.state.items.find(item => item.name === name);
 
         if (existingItem) {
             existingItem.amount++;
         } else {
-            currentItems.push({
-                amount,
-                name,
-                price
-            });
+            currentItems.push({ amount, name, price });
         }
 
         this.setState({ items: currentItems });
     }
 
 
-    updateDeleteItemState = (itemDatas) => {
-        this.setState({ items: itemDatas });
+    addAmountFromItem = (currentItems) => {
+        this.setState({ items: currentItems });
+    }
+
+
+    removeAmountFromItem = (currentItems) => {
+        this.setState({ items: currentItems });
+    }
+
+
+    updateDeleteItemState = (itemData) => {
+        this.setState({ items: itemData });
     }
 
 
@@ -43,7 +48,10 @@ class App extends Component {
                     <Product onAdd={() => this.addItem(1, 'Äpfel', 3.99)} title="Äpfel" image="apfel.jpg" description="Füge Äpfel zu deinem Warenkorb hinzu." />
                     <Product onAdd={() => this.addItem(1, 'Birnen', 4.49)} title="Birnen" image="birne.jpg" description="Füge Birnen zu deinem Warenkorb hinzu." />
                 </div>
-                <ShoppingCard items={this.state.items} onDelete={this.updateDeleteItemState} />
+                <ShoppingCard items={this.state.items} 
+                onDelete={this.updateDeleteItemState} 
+                onAddAmount={this.addAmountFromItem}
+                onRemoveAmount={this.removeAmountFromItem} />
             </div>
         </React.Fragment>;
     }
