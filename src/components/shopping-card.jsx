@@ -11,7 +11,7 @@ class ShoppingCard extends Component {
     }
 
 
-    addAmountFromItem = (name) => {
+    addAmountFromItem = (name, price) => {
         let currentItems = this.props.items;
         let existingItem = currentItems.find(item => item.name === name);
         existingItem.amount++;
@@ -19,7 +19,7 @@ class ShoppingCard extends Component {
     }
 
 
-    removeAmountFromItem = (name) => {
+    removeAmountFromItem = (name, price) => {
         let currentItems = this.props.items;
         let existingItem = currentItems.find(item => item.name === name);
         existingItem.amount--;
@@ -37,10 +37,10 @@ class ShoppingCard extends Component {
             <h2>Warenkorb</h2>
             {this.props.items.map(item =>
                 <div key={item.name}>
-                    <button onClick={() => { this.addAmountFromItem(item.name) }}>+</button>
-                    <button onClick={() => { this.removeAmountFromItem(item.name) }}>-</button>
+                    <button className="btn btn-outline-primary" onClick={() => { this.addAmountFromItem(item.name, item.price) }}>+</button>
+                    <button className="btn btn-outline-primary" onClick={() => { this.removeAmountFromItem(item.name, item.price) }}>-</button>
                     <span>{item.amount}x {item.name} {item.price} €</span>
-                    <button onClick={() => { this.deleteItem(item.name) }}>x</button>
+                    <button className="btn btn-outline-danger" onClick={() => { this.deleteItem(item.name) }}>x</button>
                 </div>
             )}
         </div>;

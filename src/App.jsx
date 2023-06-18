@@ -8,6 +8,33 @@ class App extends Component {
         items: []
     }
 
+    products = [
+        {
+            title: 'Tomaten',
+            image: 'tomate.jpg',
+            description: 'Füge Tomaten zu deinem Warenkorb hinzu.',
+            price: 2.99
+        },
+        {
+            title: 'Gurken',
+            image: 'gurke.jpg',
+            description: 'Füge Gurken zu deinem Warenkorb hinzu.',
+            price: 1.99
+        },
+        {
+            title: 'Äpfel',
+            image: 'apfel.jpg',
+            description: 'Füge Äpfel zu deinem Warenkorb hinzu.',
+            price: 3.99
+        },
+        {
+            title: 'Birnen',
+            image: 'birne.jpg',
+            description: 'Füge Birnen zu deinem Warenkorb hinzu.',
+            price: 4.49
+        },
+    ]
+
 
     addItem = (amount, name, price) => {
         let currentItems = this.state.items;
@@ -23,13 +50,13 @@ class App extends Component {
     }
 
 
-    addAmountFromItem = (currentItems) => {
-        this.setState({ items: currentItems });
+    addAmountFromItem = (itemData) => {
+        this.setState({ items: itemData });
     }
 
 
-    removeAmountFromItem = (currentItems) => {
-        this.setState({ items: currentItems });
+    removeAmountFromItem = (itemData) => {
+        this.setState({ items: itemData });
     }
 
 
@@ -43,15 +70,16 @@ class App extends Component {
             <Navbar />
             <div className="main-container">
                 <div className="product-container">
-                    <Product onAdd={() => this.addItem(1, 'Tomaten', 2.99)} title="Tomaten" image="tomate.jpg" description="Füge Tomaten zu deinem Warenkorb hinzu." />
-                    <Product onAdd={() => this.addItem(1, 'Gurken', 1.99)} title="Gurken" image="gurke.jpg" description="Füge Gurken zu deinem Warenkorb hinzu." />
-                    <Product onAdd={() => this.addItem(1, 'Äpfel', 3.99)} title="Äpfel" image="apfel.jpg" description="Füge Äpfel zu deinem Warenkorb hinzu." />
-                    <Product onAdd={() => this.addItem(1, 'Birnen', 4.49)} title="Birnen" image="birne.jpg" description="Füge Birnen zu deinem Warenkorb hinzu." />
+                    {this.products.map(product =>
+                        <Product key={product.title} title={product.title} image={product.image} description={product.description}
+                            onAdd={() => this.addItem(1, product.title, product.price)} />
+                    )}
                 </div>
-                <ShoppingCard items={this.state.items} 
-                onDelete={this.updateDeleteItemState} 
-                onAddAmount={this.addAmountFromItem}
-                onRemoveAmount={this.removeAmountFromItem} />
+
+                <ShoppingCard items={this.state.items}
+                    onDelete={this.updateDeleteItemState}
+                    onAddAmount={this.addAmountFromItem}
+                    onRemoveAmount={this.removeAmountFromItem} />
             </div>
         </React.Fragment>;
     }
